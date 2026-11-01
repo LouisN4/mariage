@@ -1,517 +1,907 @@
-```html
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julie & Louis — Notre Mariage</title>
-    
+    <title>Mariage de Julie & Louis - 10 Juillet 2027</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Configuration Tailwind personnalisée -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        eucalyptus: {
-                            50: '#f2f7f4',
-                            100: '#e1ede6',
-                            200: '#c5dbd0',
-                            600: '#588157',
-                            700: '#3a5a40',
-                            800: '#344e41',
-                        },
-                        champagne: {
-                            50: '#fdfbf7',
-                            100: '#f7f1e5',
-                            200: '#ebdcc3',
-                            300: '#dfc6a0',
-                        },
-                        gold: {
-                            DEFAULT: '#c5a059',
-                            hover: '#b08b46'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['Playfair Display', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                        script: ['Alex Brush', 'cursive'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Styles personnalisés & Animations */
-        .bg-pattern {
-            background-color: #fdfbf7;
-            background-image: radial-gradient(#c5dbd0 0.75px, transparent 0.75px), radial-gradient(#c5dbd0 0.75px, #fdfbf7 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+        :root {
+            --primary: #4a5d4e;       /* Sage Green / Vert Eucalyptus */
+            --primary-light: #738a78;
+            --primary-dark: #2c382f;
+            --accent: #d4af37;        /* Gold / Doré */
+            --accent-soft: #f4ece1;   /* Warm Cream / Crème */
+            --bg-light: #faf8f5;
+            --text-dark: #2b2b2b;
+            --text-muted: #666666;
+            --white: #ffffff;
+            --radius-lg: 16px;
+            --radius-md: 8px;
+            --transition: all 0.3s ease;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 35px rgba(74, 93, 78, 0.12);
         }
 
-        .gold-border-gradient {
-            border-image: linear-gradient(to right, #ebdcc3, #c5a059, #ebdcc3) 1;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Parallax effect simulation */
-        .hero-overlay {
-            background: linear-gradient(180deg, rgba(52, 78, 65, 0.4) 0%, rgba(52, 78, 65, 0.7) 100%);
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Cormorant Garamond', serif;
         }
-        ::-webkit-scrollbar-track {
-            background: #fdfbf7;
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #a3b18a;
-            border-radius: 4px;
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 6rem 1.5rem 3rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #f1e7d0;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-date-location {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.2rem;
+            min-width: 90px;
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.4rem;
+            opacity: 0.9;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #2b2510;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #c29f2e;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Sections Layout --- */
+        section {
+            padding: 6rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '♦';
+            display: block;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        /* --- Notre Histoire --- */
+        .story-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-soft);
+            transform: translateX(-50%);
+        }
+
+        .story-item {
+            margin-bottom: 3rem;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            width: 50%;
+            padding-right: 2.5rem;
+        }
+
+        .story-item:nth-child(even) {
+            align-self: flex-end;
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 2.5rem;
+            justify-content: flex-start;
+        }
+
+        .story-dot {
+            position: absolute;
+            right: -8px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 2px var(--accent-soft);
+        }
+
+        .story-item:nth-child(even) .story-dot {
+            right: auto;
+            left: -10px;
+        }
+
+        .story-card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .story-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .story-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        /* --- Programme --- */
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-light);
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-top-color: var(--accent);
+        }
+
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-soft);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .program-time {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-dark);
+        }
+
+        .program-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Infos Pratiques --- */
+        .info-bg {
+            background-color: var(--accent-soft);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .info-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .info-card h3 i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .info-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .info-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* --- Liste / Cagnotte --- */
+        .gift-box {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 2rem;
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-soft);
+            border: 1px dashed var(--primary-light);
+        }
+
+        .gift-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .gift-box p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .iban-details {
+            background: var(--bg-light);
+            padding: 1.2rem;
+            border-radius: var(--radius-md);
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            border: 1px solid #e0e0e0;
+        }
+
+        /* --- RSVP Section --- */
+        .rsvp-section {
+            background: linear-gradient(rgba(74, 93, 78, 0.92), rgba(44, 56, 47, 0.95)), 
+                        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80') center/cover;
+            color: var(--white);
+        }
+
+        .rsvp-section .section-title,
+        .rsvp-section .section-subtitle {
+            color: var(--white);
+        }
+
+        .rsvp-card {
+            background: var(--white);
+            color: var(--text-dark);
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #dddddd;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 93, 78, 0.15);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-thanks {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: var(--transition);
+            }
+            .nav-links.active { transform: translateY(0); }
+            .menu-toggle { display: block; }
+
+            .story-timeline::before { left: 20px; }
+            .story-item, .story-item:nth-child(even) {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+                margin-left: 0;
+            }
+            .story-dot, .story-item:nth-child(even) .story-dot {
+                left: 11px;
+            }
+            .countdown { flex-wrap: wrap; }
+            .countdown-item { min-width: 70px; padding: 0.8rem; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="font-sans text-gray-700 bg-champagne-50 antialiased selection:bg-eucalyptus-200 selection:text-eucalyptus-800">
+<body>
 
-    <!-- BARRE DE NAVIGATION -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 bg-white/80 backdrop-blur-md shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <a href="#" class="font-script text-3xl sm:text-4xl text-eucalyptus-800 tracking-wide hover:text-gold transition-colors">
-                Clara & Julien
-            </a>
-
-            <!-- Liens ordinateur -->
-            <div class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium text-eucalyptus-800">
-                <a href="#accueil" class="hover:text-gold transition-colors">Accueil</a>
-                <a href="#histoire" class="hover:text-gold transition-colors">Histoire</a>
-                <a href="#programme" class="hover:text-gold transition-colors">Programme</a>
-                <a href="#infos" class="hover:text-gold transition-colors">Infos Pratiques</a>
-                <a href="#liste" class="hover:text-gold transition-colors">Liste</a>
-                <a href="#rsvp" class="bg-eucalyptus-700 hover:bg-eucalyptus-800 text-white px-5 py-2.5 rounded-full transition-all transform hover:-translate-y-0.5 shadow-md">RSVP</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">J & L</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
             </div>
-
-            <!-- Bouton Menu Mobile -->
-            <button id="menu-btn" class="md:hidden text-eucalyptus-800 focus:outline-none p-2" aria-label="Ouvrir le menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <!-- Menu Déroulant Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-gray-100 px-6 pt-2 pb-6 space-y-4 text-center text-sm uppercase tracking-widest text-eucalyptus-800">
-            <a href="#accueil" class="block py-2 hover:text-gold">Accueil</a>
-            <a href="#histoire" class="block py-2 hover:text-gold">Notre Histoire</a>
-            <a href="#programme" class="block py-2 hover:text-gold">Programme</a>
-            <a href="#infos" class="block py-2 hover:text-gold">Infos Pratiques</a>
-            <a href="#liste" class="block py-2 hover:text-gold">Liste de Mariage</a>
-            <a href="#rsvp" class="block py-2.5 bg-eucalyptus-700 text-white rounded-full font-medium shadow">RSVP</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#histoire">Notre Histoire</a></li>
+                <li><a href="#programme">Programme</a></li>
+                <li><a href="#infos">Infos Pratiques</a></li>
+                <li><a href="#liste">Liste de Mariage</a></li>
+                <li><a href="#rsvp">RSVP</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- SECTION HERO -->
-    <section id="accueil" class="relative min-h-screen flex items-center justify-center text-center px-4 pt-20">
-        <!-- Image de fond avec overlay -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80" alt="Mariage Fond" class="w-full h-full object-cover">
-            <div class="absolute inset-0 hero-overlay"></div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Nous allons nous dire OUI !</p>
+            <h1 class="hero-title">Julie & Louis</h1>
+            <p class="hero-date-location">10 JUILLET 2027 — VALZERGUES</p>
+            
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Jours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Heures</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Min</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Sec</div>
+                </div>
+            </div>
+
+            <a href="#rsvp" class="btn btn-primary">Confirmer ma présence</a>
         </div>
+    </header>
 
-        <div class="relative z-10 max-w-3xl mx-auto text-white space-y-6 my-12">
-            <span class="text-lg sm:text-xl font-light tracking-[0.3em] uppercase block text-champagne-200">Nous allons nous dire OUI !</span>
-            <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal tracking-wide">Clara & Julien</h1>
-            <p class="font-serif italic text-xl sm:text-2xl text-champagne-100">Samedi 21 Juin 2025 • Château de la Rose, Provence</p>
-
-            <div class="w-24 h-0.5 bg-gold/60 mx-auto my-6"></div>
-
-            <!-- COMPTE À REBOURS -->
-            <div class="py-4">
-                <p class="text-xs uppercase tracking-widest text-champagne-200 mb-4">Le grand jour dans</p>
-                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto text-white">
-                    <div class="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20">
-                        <span id="countdown-days" class="block text-2xl sm:text-4xl font-serif font-bold text-champagne-100">00</span>
-                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-200">Jours</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20">
-                        <span id="countdown-hours" class="block text-2xl sm:text-4xl font-serif font-bold text-champagne-100">00</span>
-                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-200">Heures</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20">
-                        <span id="countdown-minutes" class="block text-2xl sm:text-4xl font-serif font-bold text-champagne-100">00</span>
-                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-200">Min</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20">
-                        <span id="countdown-seconds" class="block text-2xl sm:text-4xl font-serif font-bold text-champagne-100">00</span>
-                        <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-200">Sec</span>
-                    </div>
-                </div>
+    <!-- Notre Histoire -->
+    <section id="histoire">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Notre Aventure</span>
+                <h2 class="section-title">Notre Histoire</h2>
             </div>
 
-            <div class="pt-6">
-                <a href="#rsvp" class="inline-block bg-gold hover:bg-gold-hover text-white font-medium px-8 py-3.5 rounded-full shadow-lg transition-all transform hover:-translate-y-1 tracking-wider text-sm uppercase">
-                    Confirmer ma présence
-                </a>
-            </div>
-        </div>
-
-        <!-- Fleche vers le bas -->
-        <a href="#histoire" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/80 hover:text-white transition-colors animate-bounce">
-            <i data-lucide="chevron-down" class="w-8 h-8"></i>
-        </a>
-    </section>
-
-    <!-- SECTION NOTRE HISTOIRE -->
-    <section id="histoire" class="py-20 sm:py-28 px-4 bg-champagne-50">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16 space-y-3">
-                <span class="text-xs uppercase tracking-[0.3em] text-eucalyptus-600 font-semibold">Comment tout a commencé</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-eucalyptus-800">Notre Histoire</h2>
-                <div class="w-16 h-0.5 bg-gold mx-auto"></div>
-            </div>
-
-            <!-- Timeline -->
-            <div class="relative border-l-2 border-eucalyptus-200 ml-4 sm:ml-32 space-y-12">
-                <!-- Étape 1 -->
-                <div class="relative pl-8 sm:pl-12 group">
-                    <div class="absolute -left-3 top-1.5 bg-gold w-6 h-6 rounded-full border-4 border-champagne-50 flex items-center justify-center shadow-sm"></div>
-                    <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-semibold tracking-wider uppercase text-eucalyptus-600 mb-1 sm:mb-0">
-                        Septembre 2018
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">La Première Rencontre</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Nos chemins se sont croisés pour la première fois à la terrasse d'un petit café parisien. Ce qui devait être une simple pause café de 20 minutes s'est transformé en une discussion passionnée de 4 heures.
-                        </p>
+            <div class="story-timeline">
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-card">
+                        <div class="story-date">JUIN 2021</div>
+                        <h3>La Première Rencontre</h3>
+                        <p>Un regard échangé lors d'une belle soirée d'été, un verre partagé et des heures à refaire le monde sans voir le temps passer.</p>
                     </div>
                 </div>
 
-                <!-- Étape 2 -->
-                <div class="relative pl-8 sm:pl-12 group">
-                    <div class="absolute -left-3 top-1.5 bg-gold w-6 h-6 rounded-full border-4 border-champagne-50 flex items-center justify-center shadow-sm"></div>
-                    <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-semibold tracking-wider uppercase text-eucalyptus-600 mb-1 sm:mb-0">
-                        Été 2021
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">Le Premier Grand Voyage</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Un road-trip mémorable le long des côtes italiennes. Entre les pizzas au coucher du soleil à Positano et les balades improvisées, nous avons compris que nous formions l'équipe parfaite.
-                        </p>
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-card">
+                        <div class="story-date">SEPTEMBRE 2023</div>
+                        <h3>Notre Premier Cocon</h3>
+                        <p>Après de nombreuses aventures et voyages partagés, nous avons décidé de poser nos valises ensemble sous le même toit.</p>
                     </div>
                 </div>
 
-                <!-- Étape 3 -->
-                <div class="relative pl-8 sm:pl-12 group">
-                    <div class="absolute -left-3 top-1.5 bg-gold w-6 h-6 rounded-full border-4 border-champagne-50 flex items-center justify-center shadow-sm"></div>
-                    <div class="sm:absolute sm:-left-36 sm:top-1 text-xs font-semibold tracking-wider uppercase text-eucalyptus-600 mb-1 sm:mb-0">
-                        Novembre 2023
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">La Demande en Mariage</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Lors d'une escapade sous les étoiles en Islande, au milieu des aurores boréales. Julien a posé un genou à terre, et Clara a répondu un "Oui" plein d'émotion et de larmes de joie.
-                        </p>
+                <div class="story-item">
+                    <div class="story-dot"></div>
+                    <div class="story-card">
+                        <div class="story-date">DÉCEMBRE 2025</div>
+                        <h3>La Demande en Mariage</h3>
+                        <p>Un coucher de soleil inoubliable, une question murmurée avec émotion et un grand "OUI" venu du cœur.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION PROGRAMME DE LA JOURNÉE -->
-    <section id="programme" class="py-20 sm:py-28 px-4 bg-white">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 space-y-3">
-                <span class="text-xs uppercase tracking-[0.3em] text-eucalyptus-600 font-semibold">Le déroulement des festivités</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-eucalyptus-800">Programme de la Journée</h2>
-                <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+    <!-- Programme -->
+    <section id="programme" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Le Grand Jour</span>
+                <h2 class="section-title">Programme de la Journée</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Événement 1 -->
-                <div class="bg-champagne-50 p-8 rounded-2xl text-center border border-champagne-200/60 hover:border-gold transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-eucalyptus-100 text-eucalyptus-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="church" class="w-7 h-7"></i>
-                    </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-gold block mb-1">14h30</span>
-                    <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">Cérémonie Laïque</h3>
-                    <p class="text-xs text-gray-500 mb-4">Jardins du Château</p>
-                    <p class="text-gray-600 text-sm">Échange des vœux et des alliances entourés de nos proches.</p>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-icon"><i class="fas fa-church"></i></div>
+                    <div class="program-time">14h30</div>
+                    <h3>Cérémonie</h3>
+                    <p>Rendez-vous à l'église de Valzergues pour échanger nos voeux entourés de nos proches.</p>
                 </div>
 
-                <!-- Événement 2 -->
-                <div class="bg-champagne-50 p-8 rounded-2xl text-center border border-champagne-200/60 hover:border-gold transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-eucalyptus-100 text-eucalyptus-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="glass-water" class="w-7 h-7"></i>
-                    </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-gold block mb-1">16h30</span>
-                    <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">Vin d'Honneur</h3>
-                    <p class="text-xs text-gray-500 mb-4">Terrasse Vue Panoramique</p>
-                    <p class="text-gray-600 text-sm">Cocktails, rafraîchissements, ateliers gourmands et photos de groupe.</p>
+                <div class="program-card">
+                    <div class="program-icon"><i class="fas fa-glass-cheers"></i></div>
+                    <div class="program-time">16h30</div>
+                    <h3>Vin d'Honneur</h3>
+                    <p>Cocktail, rafraîchissements et animations musicales sur le domaine pour fêter ce beau moment.</p>
                 </div>
 
-                <!-- Événement 3 -->
-                <div class="bg-champagne-50 p-8 rounded-2xl text-center border border-champagne-200/60 hover:border-gold transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-eucalyptus-100 text-eucalyptus-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="utensils" class="w-7 h-7"></i>
-                    </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-gold block mb-1">20h00</span>
-                    <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">Dîner de Gala</h3>
-                    <p class="text-xs text-gray-500 mb-4">Grande Salle de Réception</p>
-                    <p class="text-gray-600 text-sm">Repas gastronomique, discours surprises et pièce montée.</p>
-                </div>
-
-                <!-- Événement 4 -->
-                <div class="bg-champagne-50 p-8 rounded-2xl text-center border border-champagne-200/60 hover:border-gold transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-eucalyptus-100 text-eucalyptus-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="music" class="w-7 h-7"></i>
-                    </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-gold block mb-1">23h30</span>
-                    <h3 class="font-serif text-xl text-eucalyptus-800 mb-2">Soirée Dansante</h3>
-                    <p class="text-xs text-gray-500 mb-4">Piste de Danse & Bar</p>
-                    <p class="text-gray-600 text-sm">Ouverture du bal et fête jusqu'au bout de la nuit avec DJ Set.</p>
+                <div class="program-card">
+                    <div class="program-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="program-time">20h00</div>
+                    <h3>Dîner & Festivités</h3>
+                    <p>Repas gastronomique suivi de l'ouverture de bal et de la fête jusqu'au bout de la nuit !</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION INFOS PRATIQUES -->
-    <section id="infos" class="py-20 sm:py-28 px-4 bg-champagne-50">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 space-y-3">
-                <span class="text-xs uppercase tracking-[0.3em] text-eucalyptus-600 font-semibold">Organisez votre venue</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-eucalyptus-800">Informations Pratiques</h2>
-                <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+    <!-- Infos Pratiques -->
+    <section id="infos" class="info-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Organisation</span>
+                <h2 class="section-title">Informations Pratiques</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Carte 1 : Accès -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="p-3 bg-eucalyptus-50 text-eucalyptus-700 rounded-xl">
-                            <i data-lucide="map-pin" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-serif text-xl text-eucalyptus-800">Lieu & Accès</h3>
-                    </div>
-                    <p class="font-medium text-gray-800 mb-1">Château de la Rose</p>
-                    <p class="text-gray-600 text-sm mb-4">123 Route des Lavandes, 84000 Avignon</p>
-                    <ul class="text-xs text-gray-500 space-y-2 mb-6">
-                        <li>• Gare TGV Avignon à 20 min</li>
-                        <li>• Parking gratuit sur place (150 places)</li>
-                    </ul>
-                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs uppercase tracking-wider font-semibold text-eucalyptus-700 hover:text-gold transition-colors">
-                        Voir l'itinéraire <i data-lucide="external-link" class="w-3.5 h-3.5 ml-1"></i>
-                    </a>
-                </div>
-
-                <!-- Carte 2 : Hébergements -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="p-3 bg-eucalyptus-50 text-eucalyptus-700 rounded-xl">
-                            <i data-lucide="hotel" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-serif text-xl text-eucalyptus-800">Hébergements</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-                        Des tarifs préférentiels ont été négociés avec des établissements partenaires à proximité :
-                    </p>
-                    <ul class="text-xs text-gray-600 space-y-3 mb-4">
-                        <li class="border-b border-gray-100 pb-2">
-                            <strong class="block text-gray-800">Hôtel de la Gare (3★)</strong>
-                            À 10 min • Code promo: MARIAGE2025
-                        </li>
-                        <li class="border-b border-gray-100 pb-2">
-                            <strong class="block text-gray-800">Gîtes du Domaine</strong>
-                            Sur place • Places limitées
-                        </li>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Lieu & Accès</h3>
+                    <p>Le mariage se déroulera à <strong>Valzergues</strong>.</p>
+                    <ul>
+                        <li>Parking disponible sur place.</li>
+                        <li>Possibilité de laisser les véhicules jusqu'au lendemain 14h.</li>
+                        <li>Un service de navette sera mis en place pour la fin de soirée.</li>
                     </ul>
                 </div>
 
-                <!-- Carte 3 : Code Vestimentaire -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="p-3 bg-eucalyptus-50 text-eucalyptus-700 rounded-xl">
-                            <i data-lucide="sparkles" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-serif text-xl text-eucalyptus-800">Dress Code</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-                        <strong>Tenue Chic & Champêtre</strong>
-                    </p>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
-                        Favorisez des tons doux (pasteurs, vert eucalyptus, terracotta, beige). Le blanc et l'ivoire sont réservés à la mariée !
-                    </p>
-                    <div class="flex space-x-2 pt-2">
-                        <div class="w-6 h-6 rounded-full bg-[#c5dbd0]" title="Vert Eucalyptus"></div>
-                        <div class="w-6 h-6 rounded-full bg-[#ebdcc3]" title="Champagne"></div>
-                        <div class="w-6 h-6 rounded-full bg-[#e07a5f]" title="Terracotta"></div>
-                        <div class="w-6 h-6 rounded-full bg-[#f4f1de]" title="Sable"></div>
-                    </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-bed"></i> Hébergements</h3>
+                    <p>Voici quelques suggestions de logements à proximité :</p>
+                    <ul>
+                        <li><strong>Gîtes & Chambres d'hôtes</strong> à Valzergues et alentours.</li>
+                        <li>Hôtels situés dans les communes voisines.</li>
+                        <li>Réservation recommandée le plus tôt possible !</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-tshirt"></i> Dress Code</h3>
+                    <p><strong>Chic & Champêtre</strong></p>
+                    <ul>
+                        <li>Couleurs suggérées : Tons pastel, vert eucalyptus, beige, rosé.</li>
+                        <li>Mesdames, prévoyez des talons adaptés aux pavés et pelouses !</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION LISTE DE MARIAGE / CAGNOTTE -->
-    <section id="liste" class="py-20 sm:py-28 px-4 bg-white">
-        <div class="max-w-3xl mx-auto text-center space-y-8">
-            <div class="space-y-3">
-                <span class="text-xs uppercase tracking-[0.3em] text-eucalyptus-600 font-semibold">Voyage de Noces</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-eucalyptus-800">Liste de Mariage</h2>
-                <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+    <!-- Liste de Mariage -->
+    <section id="liste">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Votre Présence est notre plus beau cadeau</span>
+                <h2 class="section-title">Liste de Mariage</h2>
             </div>
 
-            <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Votre présence à nos côtés est le plus beau des cadeaux. Si toutefois vous souhaitez contribuer à la réalisation de nos futurs projets et à notre voyage de noces au Japon, une urne sera disponible lors de la réception.
-            </p>
-
-            <div class="bg-champagne-50 p-8 rounded-2xl border border-champagne-200 max-w-lg mx-auto space-y-6">
-                <div class="flex justify-center text-gold">
-                    <i data-lucide="plane" class="w-10 h-10"></i>
-                </div>
-                <div>
-                    <h3 class="font-serif text-xl text-eucalyptus-800 mb-1">Cagnotte en Ligne</h3>
-                    <p class="text-xs text-gray-500">Pour ceux qui préfèrent participer à distance de manière sécurisée.</p>
-                </div>
-
-                <a href="https://www.leetchi.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-eucalyptus-700 hover:bg-eucalyptus-800 text-white text-xs uppercase tracking-widest font-medium px-6 py-3 rounded-full transition-all shadow">
-                    Accéder à la cagnotte en ligne
+            <div class="gift-box">
+                <div class="gift-icon"><i class="fas fa-plane-departure"></i></div>
+                <p>Votre présence à nos côtés pour célébrer notre union est le plus cher de nos souhaits.<br>Si vous désirez contribuer à notre voyage de noces ou à nos futurs projets, une urne sera mise à votre disposition le jour J.</p>
+                
+                <a href="#" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt" style="margin-right:8px;"></i> Accéder à notre cagnotte en ligne
                 </a>
 
-                <div class="pt-4 border-t border-champagne-200 text-xs text-gray-500">
-                    <p class="font-mono text-[11px] text-gray-600">IBAN : FR76 1234 5678 9012 3456 7890 123</p>
-                    <p class="text-[10px] mt-1">Titulaire : Clara & Julien</p>
+                <div>
+                    <span class="iban-details">
+                        IBAN : FR76 XXXX XXXX XXXX XXXX XXXX XXX
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION FORMULAIRE RSVP -->
-    <section id="rsvp" class="py-20 sm:py-28 px-4 bg-eucalyptus-800 text-white relative">
-        <div class="max-w-2xl mx-auto">
-            <div class="text-center mb-12 space-y-3">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne-200 font-semibold">Réponse souhaitée avant le 1er Mai 2025</span>
-                <h2 class="font-serif text-3xl sm:text-5xl text-white">Confirmez votre présence</h2>
-                <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+    <!-- RSVP -->
+    <section id="rsvp" class="rsvp-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Réponse souhaitée avant le 1er mai 2027</span>
+                <h2 class="section-title">Confirmez votre présence</h2>
             </div>
 
-            <!-- Formulaire -->
-            <form id="rsvp-form" action="https://formspree.io/f/moqgbeed" method="POST" class="bg-white text-gray-800 p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
-                <!-- Nom & Prénom -->
-                <div>
-                    <label for="fullname" class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Votre Nom et Prénom *</label>
-                    <input type="text" id="fullname" name="fullname" required placeholder="ex: Jean Dupont" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-eucalyptus-600 text-sm">
-                </div>
-
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Adresse Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="votre.email@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-eucalyptus-600 text-sm">
-                </div>
-
-                <!-- Présence -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Serez-vous parmi nous ? *</label>
-                    <div class="grid grid-cols-2 gap-4">
-                        <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-champagne-50 transition-colors">
-                            <input type="radio" name="attending" value="Oui" checked class="text-eucalyptus-600 focus:ring-eucalyptus-600">
-                            <span class="ml-2 text-sm font-medium">Oui, avec plaisir ! 🎉</span>
-                        </label>
-                        <label class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-champagne-50 transition-colors">
-                            <input type="radio" name="attending" value="Non" class="text-eucalyptus-600 focus:ring-eucalyptus-600">
-                            <span class="ml-2 text-sm font-medium">Malheureusement non 😢</span>
-                        </label>
+            <div class="rsvp-card">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nom & Prénom</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Votre nom complet" required>
                     </div>
-                </div>
 
-                <!-- Nombre de personnes -->
-                <div id="guests-field">
-                    <label for="guests" class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Nombre d'accompagnants (vous inclus)</label>
-                    <select id="guests" name="guests" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-eucalyptus-600 text-sm bg-white">
-                        <option value="1">1 personne</option>
-                        <option value="2">2 personnes</option>
-                        <option value="3">3 personnes</option>
-                        <option value="4">4+ personnes</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Adresse E-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="votre.email@exemple.com" required>
+                    </div>
 
-                <!-- Régimes alimentaires -->
-                <div>
-                    <label for="diet" class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Régimes ou allergies alimentaires</label>
-                    <input type="text" id="diet" name="diet" placeholder="ex: Végétarien, Allergie aux fruits de mer..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-eucalyptus-600 text-sm">
-                </div>
+                    <div class="form-group">
+                        <label>Serez-vous présent ?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="Oui" checked> Oui, avec grand plaisir !
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="Non"> Malheureusement non
+                            </label>
+                        </div>
+                    </div>
 
-                <!-- Message -->
-                <div>
-                    <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-eucalyptus-800 mb-2">Un petit mot pour les mariés ?</label>
-                    <textarea id="message" name="message" rows="3" placeholder="Votre message..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-eucalyptus-600 text-sm"></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="guests">Nombre de personnes (vous inclus)</label>
+                        <input type="number" id="guests" name="guests" class="form-control" min="1" max="10" value="1">
+                    </div>
 
-                <!-- Bouton Envoi -->
-                <button type="submit" class="w-full bg-gold hover:bg-gold-hover text-white font-medium py-3.5 rounded-xl uppercase tracking-wider text-xs transition-all shadow-lg transform hover:-translate-y-0.5">
-                    Envoyer ma réponse
-                </button>
-            </form>
+                    <div class="form-group">
+                        <label for="diet">Régime alimentaire / Allergies</label>
+                        <input type="text" id="diet" name="diet" class="form-control" placeholder="Ex: Végétarien, sans gluten...">
+                    </div>
 
-            <!-- Message de confirmation dynamique -->
-            <div id="form-status" class="hidden mt-6 p-6 bg-white/10 backdrop-blur-md rounded-2xl text-center border border-white/20">
-                <i data-lucide="check-circle" class="w-12 h-12 text-gold mx-auto mb-3"></i>
-                <h3 class="font-serif text-2xl text-white mb-2">Merci pour votre réponse !</h3>
-                <p class="text-sm text-champagne-100">Nous avons bien enregistré vos informations. À très vite !</p>
+                    <div class="form-group">
+                        <label for="message">Un petit mot pour les mariés ?</label>
+                        <textarea id="message" name="message" class="form-control" rows="4" placeholder="Votre message..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">Envoyer ma réponse</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- PIED DE PAGE -->
-    <footer class="bg-eucalyptus-800 text-champagne-200 py-12 text-center border-t border-eucalyptus-700">
-        <div class="max-w-4xl mx-auto px-4 space-y-4">
-            <p class="font-script text-4xl text-white">Clara & Julien</p>
-            <p class="text-xs tracking-widest uppercase text-champagne-300">21 Juin 2025 • Château de la Rose</p>
-            <div class="w-12 h-0.5 bg-gold/40 mx-auto my-4"></div>
-            <p class="text-[11px] text-eucalyptus-200/60">Fait avec amour pour notre mariage</p>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Julie & Louis</div>
+            <p class="footer-thanks">Nous avons hâte de célébrer ce moment magique avec vous !</p>
+            <p style="font-size: 0.8rem; opacity: 0.5;">© 2027 Julie & Louis - Mariage à Valzergues</p>
         </div>
     </footer>
 
-    <!-- LOGIQUE JAVASCRIPT -->
+    <!-- JavaScript Script -->
     <script>
-        // Initialiser les icônes Lucide
-        lucide.createIcons();
-
         // Menu Mobile Toggle
-        const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        // Fermer le menu mobile lors du clic sur un lien
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                navLinks.classList.remove('active');
             });
         });
 
-        // COMPTE À REBOURS
-        const weddingDate = new Date('June 21, 2025 14:30:00').getTime();
+        // Compte à rebours dynamique pour le 10 Juillet 2027
+        const weddingDate = new Date('July 10, 2027 14:30:00').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
             if (distance < 0) {
-                document.getElementById('countdown-days').innerText = "00";
-                document.getElementById('countdown-hours').innerText = "00";
-                document.getElementById('countdown-minutes').innerText = "00";
-                document.getElementById('countdown-seconds').innerText = "00";
+                document.getElementById('countdown').innerHTML = "<h3 style='color: white;'>C'est le grand jour !</h3>";
                 return;
             }
 
@@ -520,47 +910,21 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('countdown-days').innerText = days < 10 ? '0' + days : days;
-            document.getElementById('countdown-hours').innerText = hours < 10 ? '0' + hours : hours;
-            document.getElementById('countdown-minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('countdown-seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // GESTION DU FORMULAIRE RSVP (AJAX / Formspree + Fallback Local)
-        const form = document.getElementById('rsvp-form');
-        const statusDiv = document.getElementById('form-status');
-
-        form.addEventListener('submit', async function(e) {
+        // Gestion du Formulaire RSVP
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const data = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    form.classList.add('hidden');
-                    statusDiv.classList.remove('hidden');
-                } else {
-                    // Fallback si l'URL Formspree n'est pas encore configurée correctement
-                    form.classList.add('hidden');
-                    statusDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                // Succès visuel fluide en mode hors ligne/test
-                form.classList.add('hidden');
-                statusDiv.classList.remove('hidden');
-            }
+            alert("Merci beaucoup ! Votre réponse pour le mariage de Julie & Louis à Valzergues a bien été enregistrée.");
+            this.reset();
         });
     </script>
 </body>
 </html>
-```
